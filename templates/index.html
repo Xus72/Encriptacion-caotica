@@ -7,6 +7,20 @@
     <title>Sistema de encriptación caóticos</title>
     {% endblock %} 
     {% endblock %}
+
+    <script>
+        function showHideKey() {
+            var status = document.getElementById("keys");
+            if(status.value == "si"){
+                document.getElementById('Tiene_keys').style.display='block';
+                document.getElementById('NoTiene_keys').style.display='none';
+            } else {
+                document.getElementById('Tiene_keys').style.display='none';
+                document.getElementById('NoTiene_keys').style.display='block';
+            }
+        }
+    </script>
+
 </head>
 <body>
     <div id="content">
@@ -17,10 +31,34 @@
         <p>Seleccione la opión que desee:</p>
 
         <form method=post enctype=multipart/form-data>
-            <input type="radio" name="opcion" id="Encriptar" value="Encriptar" checked> Encriptar <br>
-            <input type="radio" name="opcion" id="Desencriptar" value="Desencriptar"> Desencriptar <br>
-            <label for="image">Seleccione la imagen:</label> <br>
-            <input type=file id="image" name=file>
+            <div>
+                <label for="Encriptar"></label><input type="radio" name="opcion" id="Encriptar" value="Encriptar" checked> Encriptar <br>
+                <label for="Desencriptar"></label><input type="radio" name="opcion" id="Desencriptar" value="Desencriptar">Desencriptar <br><br>
+            </div>
+            <div>
+                <label for="image">Seleccione la imagen:</label> <input type=file id="image" name=file><br><br>
+            </div>
+
+            <div>
+                <label for="keys">Posee la clave pública y privada</label><select id="keys" onchange="showHideKey()">
+                    <option value="si">Si</option>
+                    <option value="no">No</option>
+                </select>
+
+{#                <label for="keys"></label><input type="checkbox" id="keys" name="keys" value="si" onchange="showHideKey()"> Tengo la clave púbica y la clave privada#}
+           </div>
+
+            <div id="Tiene_keys" style="display: block">
+                <p>Introduzca la clave pública: </p> <label for="public_key"></label><input type="text" id="public_key" name="public">
+                <p>Introduzca la clave privada: </p> <label for="private_key"></label><input type="text" id="private_key" name="private"><br>
+            </div>
+
+            <div id="NoTiene_keys" style="display: none">
+                <p>Generación de claves:</p>
+                <p>Clave privada: {{ private_key }}</p>
+                <p>Clave pública: {{ public_key }}</p>
+            </div>
+
             <input type=submit value=Upload>
         </form>
         {% endblock %}</div>

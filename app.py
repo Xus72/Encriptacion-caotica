@@ -22,6 +22,8 @@ def allowed_file(filename):
 
 @app.route('/', methods=['GET', 'POST'])
 def upload_file():
+
+    private, public = k.genKeyPairs()
     if request.method == 'POST':
         # check if the post request has the file part
         if 'file' not in request.files:
@@ -29,6 +31,9 @@ def upload_file():
             return redirect(request.url)
         file = request.files['file']
         option = request.form['opcion']
+        # if request.form['si']:
+        #     public = request.form['public']
+        #     private = request.form['private']
         # if user does not select file, browser also
         # submit an empty part without filename
         if file.filename == '':
@@ -37,23 +42,24 @@ def upload_file():
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
             if option == "Encriptar":
-                public_key = 604905670620403574245710191030
-                private_key = 747588193471049732859143835301
-                key = k.Key(private_key, public_key)
+                # public_key = 604905670620403574245710191030
+                # private_key = 747588193471049732859143835301
+                key = k.Key(private, public)
                 e.encrypt(os.path.join(app.config['UPLOAD_FOLDER'], filename), app.config['UPLOAD_FOLDER'], key)
                 return redirect(url_for('uploaded_file',
                                         filename=filename))
 
             if option == "Desencriptar":
-                public_key = 604905670620403574245710191030
-                private_key = 747588193471049732859143835301
-                key = k.Key(private_key, public_key)
+                # public_key = 604905670620403574245710191030
+                # private_key = 747588193471049732859143835301
+                key = k.Key(private, public)
                 d.decrypt(os.path.join(app.config['UPLOAD_FOLDER'], filename), app.config['UPLOAD_FOLDER'], key)
                 return redirect(url_for('uploaded_file',
                                         filename=filename))
 
-    return render_template("index.html")
+    return render_template("index.html", private_key=private, public_key=public)
 
 
 @app.route('/uploads/<filename>')

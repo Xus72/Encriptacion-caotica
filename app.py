@@ -3,7 +3,7 @@ from werkzeug.utils import secure_filename
 import os
 
 import henon_arnold.encrypt as e
-import henon_arnold.encrypt as d
+import henon_arnold.decrypt as d
 import henon_arnold.Key as k
 
 UPLOAD_FOLDER = r"D:\Fork\Encriptacion-caotica\imagenes"
@@ -42,18 +42,16 @@ def upload_file():
                 private_key = 747588193471049732859143835301
                 key = k.Key(private_key, public_key)
                 e.encrypt(os.path.join(app.config['UPLOAD_FOLDER'], filename), app.config['UPLOAD_FOLDER'], key)
-
                 return redirect(url_for('uploaded_file',
                                         filename=filename))
-    # return '''
-    # <!doctype html>
-    # <title>Upload new File</title>
-    # <h1>Upload new File</h1>
-    # <form method=post enctype=multipart/form-data>
-    #   <input type=file name=file>
-    #   <input type=submit value=Upload>
-    # </form>
-    # '''
+
+            if option == "Desencriptar":
+                public_key = 604905670620403574245710191030
+                private_key = 747588193471049732859143835301
+                key = k.Key(private_key, public_key)
+                d.decrypt(os.path.join(app.config['UPLOAD_FOLDER'], filename), app.config['UPLOAD_FOLDER'], key)
+                return redirect(url_for('uploaded_file',
+                                        filename=filename))
 
     return render_template("index.html")
 

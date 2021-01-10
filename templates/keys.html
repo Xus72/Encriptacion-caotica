@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Keys
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        function showHideKey() {
+            const status = document.getElementById("keys");
+            if(status.value === "si"){
+                document.getElementById('genera_keys').style.display='none';
+            } else {
+                document.getElementById('genera_keys').style.display='block';
+            }
+        }
+    </script>
+{% endblock %}
+
+{% block content %}
+        <div>
+            <label for="keys">Posee la clave pública y privada </label><select id="keys" name="keys" onchange="showHideKey()">
+                <option value="si">Si</option>
+                <option value="no">No</option>
+            </select>
+            <br><br>
+        </div>
+
+    <div id="genera_keys" style="display: none">
+        <fieldset>
+            <p>Generación de claves:</p>
+            <ul>
+                <li>Clave pública: {{ public_key }}</li>
+                <li>Clave privada: {{ private_key }}</li>
+            </ul>
+        </fieldset>
+    </div>
+
+    <form method=post enctype=multipart/form-data>
+        <fieldset id="inserta_keys" style="display: block">
+            <label for="public_key">Introduzca la clave pública: </label><input type="text" id="public_key" name="public">
+            <br><br>
+            <label for="private_key">Introduzca la clave privada: </label><input type="text" id="private_key" name="private">
+        </fieldset>
+        <br>
+        <input type=submit value=Guardar>
+    </form>
+{% endblock %}

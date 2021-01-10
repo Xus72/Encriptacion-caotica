@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block title %}
+    Desencriptar
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        function showHideImage() {
+            const status = document.getElementById("imagen");
+            if(status.value === "si"){
+                document.getElementById('no2').style.display='none';
+                document.getElementById('si2').style.display='block'
+            } else {
+                document.getElementById('no2').style.display='block';
+                document.getElementById('si2').style.display='none'
+
+            }
+        }
+    </script>
+{% endblock %}
+
+{% block content %}
+     <div id="no" style="display: block">
+        <p>Claves a emplear:</p>
+        <ul>
+            <li>Clave pública: {{ public_key }}</li>
+            <li>Clave privada: {{ private_key }}</li>
+        </ul>
+    </div>
+
+    <div>
+        <p><a href="/Keys"> ¿Quiere cambiar las claves?</a></p>
+    </div>
+
+    <div>
+        <label for="keys">¿Quiere cambiar la imagen? </label><select id="imagen" name="imagen" onchange="showHideImage()">
+            <option value="si">Si</option>
+            <option value="no">No</option>
+        </select>
+        <br><br>
+   </div>
+
+    <div id="no2" style="display: block">
+        <p>Imagen a desencriptar: </p>
+         {{ image }}
+    </div>
+
+    <form method=post enctype=multipart/form-data>
+        <div id="si2" style="display: none">
+            <label for="image">Seleccione la imagen:</label> <input type=file id="image" name=file><br><br>
+            <input type=submit value=Cargar>
+        </div>
+    </form>
+{% endblock %}

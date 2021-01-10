@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}
+    Encriptar
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}
+
+{% block content %}
+     <div>
+        <p>Claves a emplear:</p>
+        <ul>
+            <li>Clave pública: {{ public_key }}</li>
+            <li>Clave privada: {{ private_key }}</li>
+        </ul>
+    </div>
+
+    <form method=post enctype=multipart/form-data>
+        <div>
+            <label for="image">Seleccione la imagen:</label> <input type=file id="image" name=file><br><br>
+        </div>
+
+        <input type=submit value=Upload>
+    </form>
+{% endblock %}

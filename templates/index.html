@@ -10,12 +10,10 @@
 
     <script>
         function showHideKey() {
-            var status = document.getElementById("keys");
-            if(status.value == "si"){
-                document.getElementById('Tiene_keys').style.display='block';
+            const status = document.getElementById("keys");
+            if(status.value === "si"){
                 document.getElementById('NoTiene_keys').style.display='none';
             } else {
-                document.getElementById('Tiene_keys').style.display='none';
                 document.getElementById('NoTiene_keys').style.display='block';
             }
         }
@@ -40,25 +38,32 @@
             </div>
 
             <div>
-                <label for="keys">Posee la clave pública y privada</label><select id="keys" onchange="showHideKey()">
+                <label for="keys">Posee la clave pública y privada </label><select id="keys" name="keys" onchange="showHideKey()">
                     <option value="si">Si</option>
                     <option value="no">No</option>
                 </select>
-
+                <br><br>
 {#                <label for="keys"></label><input type="checkbox" id="keys" name="keys" value="si" onchange="showHideKey()"> Tengo la clave púbica y la clave privada#}
            </div>
 
-            <div id="Tiene_keys" style="display: block">
-                <p>Introduzca la clave pública: </p> <label for="public_key"></label><input type="text" id="public_key" name="public">
-                <p>Introduzca la clave privada: </p> <label for="private_key"></label><input type="text" id="private_key" name="private"><br>
-            </div>
-
             <div id="NoTiene_keys" style="display: none">
-                <p>Generación de claves:</p>
-                <p>Clave privada: {{ private_key }}</p>
-                <p>Clave pública: {{ public_key }}</p>
+                <fieldset>
+                    <p>Generación de claves:</p>
+                    <ul>
+                        <li>Clave pública: {{ public_key }}</li>
+                        <li>Clave privada: {{ private_key }}</li>
+                    </ul>
+                </fieldset>
             </div>
 
+            <fieldset id="Tiene_keys" style="display: block">
+                <label for="public_key">Introduzca la clave pública: </label><input type="text" id="public_key" name="public">
+                <br><br>
+                <label for="private_key">Introduzca la clave privada: </label><input type="text" id="private_key" name="private">
+            </fieldset>
+
+
+            <br>
             <input type=submit value=Upload>
         </form>
         {% endblock %}</div>

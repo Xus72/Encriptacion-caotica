@@ -26,32 +26,34 @@
 {#        {% endif %}#}
 {#    {% endwith %}#}
 
-    <div>
-        <label for="keys">Posee la clave pública y privada </label><select id="keys" name="keys" onchange="showHideKey()">
-            <option value="si">Si</option>
-            <option value="no">No</option>
-        </select>
-        <br><br>
-    </div>
+        <h1 class="container">Introduzca las claves</h1>
+        <div class="container">
+            <label for="keys">Posee la clave pública y privada </label><select id="keys" name="keys" onchange="showHideKey()">
+                <option value="si">Si</option>
+                <option value="no">No</option>
+            </select>
+            <br><br>
+        </div>
 
-    <div id="genera_keys" style="display: none">
-        <fieldset>
-            <p>Generación de claves:</p>
-            <ul>
-                <li>Clave pública: {{ public_key }}</li>
-                <li>Clave privada: {{ private_key }}</li>
-            </ul>
-        </fieldset>
-    </div>
+        <div class="container" id="genera_keys" style="display: none">
+            <fieldset>
+                <p>Generación de claves:</p>
+                <ul>
+                    <li>Clave pública: {{ public_key }}</li>
+                    <li>Clave privada: {{ private_key }}</li>
+                </ul>
+            </fieldset>
+        </div>
 
-    <form method=post enctype=multipart/form-data style="display: block">
+
+    <form method=post class="container" enctype=multipart/form-data style="display: block">
         <dl>
             <dt>Clave pública:</dt>
             <dd><input type="text" id="public_key" name="public"></dd>
             <dt>Clave privada:</dt>
             <dd><input type="text" id="private_key" name="private"></dd>
         </dl>
-        <p><input type=submit value=Guardar></p>
+        <p><input type=submit value=Guardar> <a href="{{ url_for('menu') }}">Menu</a></p>
 {#        <fieldset id="inserta_keys" style="display: block">#}
 {#            <label for="public_key">Introduzca la clave pública: </label><input type="text" id="public_key" name="public">#}
 {#            <br><br>#}
@@ -61,6 +63,6 @@
 {#        <input type=submit value=Guardar>#}
     </form>
 
-    <p><a href="{{ url_for('menu') }}">Menu</a></p>
+
 
 {% endblock %}

@@ -3,36 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %} {% endblock %}</title>
+
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
     <style type="text/css">
 
-      dl {
+        dl {
         border: 3px double #ccc;
         padding: 2em;
-      }
-      dt {
-        float: left;
-        clear: left;
-        width: 110px;
-        text-align: right;
-        font-weight: bold;
-        color: green;
-      }
-      dd {
-        margin: 0 0 0 120px;
-        padding: 0 0 0.5em 0;
-      }
+         }
+        dt {
+            float: left;
+            clear: left;
+            width: 110px;
+            text-align: right;
+            font-weight: bold;
+            color: green;
+        }
+        dd {
+            margin: 0 0 0 120px;
+            padding: 0 0 0.5em 0;
+        }
 
     </style>
     {% block scripts %} {% endblock %}
 </head>
 <body>
-    {% with messages = get_flashed_messages() %}
+    {% with messages = get_flashed_messages(with_categories=True) %}
       {% if messages %}
-        <ul class=flashes>
-        {% for message in messages %}
-          <li>{{ message }}</li>
+        {% for category, message in messages %}
+            {% if category == "alert" %}
+                <div class="alert alert-warning alert-dismissible fade in">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>{{ message }}</strong>
+            {% else %}
+                <div class="alert alert-info alert-dismissible fade in">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>{{ message }}</strong>
+            {% endif %}
         {% endfor %}
-        </ul>
+        </div>
       {% endif %}
     {% endwith %}
     {% block content %}

@@ -27,7 +27,7 @@ def upload_file():
     if request.method == 'POST':
         # check if the post request has the file part
         if 'file' not in request.files:
-            flash('No file part')
+            flash(u'No file part', "alert")
             return redirect(request.url)
         file = request.files['file']
         option = request.form['opcion']
@@ -36,7 +36,7 @@ def upload_file():
         # if user does not select file, browser also
         # submit an empty part without filename
         if file.filename == '':
-            flash('No selected file')
+            flash(u'No selected file', "alert")
             return redirect(request.url)
 
         if file and allowed_file(file.filename):
@@ -74,19 +74,26 @@ def decrypt():
         public = session["public_key"]
         if request.method == "POST":
             if "file" not in request.files:
-                flash("No file part")
+                flash(u"No file part", "alert")
                 return redirect(request.url)
             else:
                 file = request.files["file"]
                 if file.filename == '':
-                    flash('No selected file')
+                    flash(u'No selected file', "alert")
                     return redirect(request.url)
                 if file and allowed_file(file.filename):
-                    decrypt_aux(file, private, public, "decrypt")
+                    try:
+                        decrypt_aux(file, private, public, "decrypt")
+                    except:
+                        flash(u"Claves introducidas incorrectas", "alert")
+                        return redirect(request.url)
+                    flash("Imagen desencriptada", "info")
+                    return redirect(url_for('uploaded_file',
+                                            filename=file.filename))
         return render_template("decrypt.html", private_key=private, public_key=public)
 
     else:
-        flash("Inserte las claves")
+        flash(u"Inserte las claves", "alert")
         return redirect(url_for("keys"))
 
 
@@ -96,12 +103,9 @@ def decrypt_aux(f, pv, pb, opt="encrypt"):
     key = k.Key(pv, pb)
     if opt == "encrypt":
         e.encrypt(os.path.join(app.config['UPLOAD_FOLDER'], filename), app.config['UPLOAD_FOLDER'], key)
-        return redirect(url_for('uploaded_file',
-                                filename=filename))
     else:
         d.decrypt(os.path.join(app.config['UPLOAD_FOLDER'], filename), app.config['UPLOAD_FOLDER'], key)
-        return redirect(url_for('uploaded_file',
-                                filename=filename))
+
 
 
 @app.route('/Encriptar', methods=["POST", "GET"])
@@ -112,16 +116,24 @@ def encrypt():
         if request.method == 'POST':
             # check if the post request has the file part
             if 'file' not in request.files:
-                flash('No file part')
+                flash(u'No file part', "alert")
                 return redirect(request.url)
             file = request.files['file']
             # if user does not select file, browser also
             # submit an empty part without filename
             if file.filename == '':
-                flash('No selected file')
+                flash(u'No selected file', "alert")
                 return redirect(request.url)
             if file and allowed_file(file.filename):
-                decrypt_aux(file, private, public)
+                try:
+                    decrypt_aux(file, private, public)
+                except:
+                    flash("Problema con la encriptación", "alert")
+                    return redirect(request.url)
+
+                flash("Imagen encriptada", "info")
+                return redirect(url_for('uploaded_file',
+                                        filename=file.filename))
         return render_template("encrypt.html", private_key=private, public_key=public)
     else:
         return redirect(url_for("keys"))
@@ -138,7 +150,7 @@ def keys():
             session["public_key"] = public_key
             return redirect(url_for("encrypt"))
         else:
-            flash("Introduzca ambas claves")
+            flash(u"Introduzca ambas claves", "alert")
             redirect(request.url)
 
     return render_template("keys.html", private_key=private, public_key=public)

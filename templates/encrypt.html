@@ -15,11 +15,18 @@
         </ul>
     </div>
 
+    <div>
+        <p><a href="/Keys"> ¿Quiere cambiar las claves?</a></p>
+    </div>
+
     <form method=post enctype=multipart/form-data>
         <div>
             <label for="image">Seleccione la imagen:</label> <input type=file id="image" name=file><br><br>
         </div>
 
-        <input type=submit value=Upload>
+        <input type=submit value=Encriptar>
     </form>
+
+    <p><a href="{{ url_for('menu') }}">Menu</a></p>
+
 {% endblock %}

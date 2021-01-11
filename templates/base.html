@@ -3,9 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %} {% endblock %}</title>
+    <style type="text/css">
+
+      dl {
+        border: 3px double #ccc;
+        padding: 2em;
+      }
+      dt {
+        float: left;
+        clear: left;
+        width: 110px;
+        text-align: right;
+        font-weight: bold;
+        color: green;
+      }
+      dd {
+        margin: 0 0 0 120px;
+        padding: 0 0 0.5em 0;
+      }
+
+    </style>
     {% block scripts %} {% endblock %}
 </head>
 <body>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul class=flashes>
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
     {% block content %}
     {% endblock %}
 </body>

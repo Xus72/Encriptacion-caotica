@@ -8,7 +8,8 @@
 {% endblock %}
 
 {% block content %}
-    <p><a href="/Keys">Insertar Kyes</a></p>
-    <p><a href="/Encriptar">Encriptar Imagen</a></p>
-    <p><a href="/Desencriptar">Desencriptar Imagen</a></p>
+    <p><a href="{{ url_for('keys') }}">Insertar Kyes</a></p>
+    <p><a href="{{ url_for('encrypt') }}">Encriptar Imagen</a></p>
+    <p><a href="{{ url_for('decrypt') }}">Desencriptar Imagen</a></p>
+    <p><a href="{{ url_for('reset') }}">Resetear</a> </p>
 {% endblock %}

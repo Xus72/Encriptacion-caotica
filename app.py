@@ -1,4 +1,4 @@
-from flask import Flask, flash, url_for, render_template, request, redirect, send_from_directory, session
+from flask import Flask, flash, url_for, render_template, request, redirect, send_from_directory, session, send_file
 from werkzeug.utils import secure_filename
 import os
 
@@ -148,6 +148,22 @@ def keys():
 def uploaded_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'],
                                filename)
+
+
+@app.route('/reset')
+def reset():
+    session.pop("primary_key", None)
+    session.pop("public_key", None)
+    return redirect(url_for("menu"))
+
+
+@app.route('/download')
+def download_file():
+    # path = "html2pdf.pdf"
+    # path = "info.xlsx"
+    path = "imagenes/dibujo.png"
+    # path = "sample.txt"
+    return send_file(path, as_attachment=True)
 
 
 from werkzeug.middleware.shared_data import SharedDataMiddleware

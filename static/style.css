@@ -1,0 +1,43 @@
+dl {
+    border: 3px double #ccc;
+    padding: 2em;
+}
+dt {
+    float: left;
+    clear: left;
+    width: 110px;
+    text-align: right;
+    font-weight: bold;
+    color: green;
+}
+dd {
+    margin: 0 0 0 120px;
+    padding: 0 0 0.5em 0;
+}
+.btn{
+    background-color: #E0E0E0;
+    color:black;
+    margin-right: 5px;
+    border-radius: 10px;
+}
+.btn-margin{
+    margin-top: 10px;
+}
+.menu-container{
+    max-width: 42em;
+    display: grid;
+    grid-template-rows: auto auto auto;
+}
+.botones{
+    display: flex;
+    justify-content: space-around;
+}
+
+.item{
+    grid-row: 2;
+}
+.enc-container{
+    max-width: 42em;
+    display: grid;
+    grid-template-rows: auto auto auto;
+}

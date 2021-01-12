@@ -7,25 +7,26 @@
 {% endblock %}
 
 {% block content %}
-     <div>
-        <p>Claves a emplear:</p>
-        <ul>
-            <li>Clave pública: {{ public_key }}</li>
-            <li>Clave privada: {{ private_key }}</li>
-        </ul>
+    <div class="enc-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+        <main class="px-3">
+            <h1>Desencriptar imagen</h1>
+            <p class="lead">Clave pública: {{ public_key }}</p>
+            <p class="lead">Clave privada: {{ private_key }}</p>
+
+            <div>
+                <p><a href="/Keys"> ¿Quiere cambiar las claves?</a></p>
+            </div>
+
+            <form method=post enctype=multipart/form-data>
+                <div>
+                    <label class="label-form" for="image">Seleccione la imagen:</label> <input class="form-control" type=file id="image" name=file>
+                </div>
+                <div class="botones row row-col-2">
+                    <div class="col"><input class="btn btn-form btn-lg btn-light fw-bold btn-margin" type=submit value=Desencriptar></div>
+                    <div class="col"><p class="lead"><a class="btn btn-form btn-lg btn-light fw-bold btn-margin" href="{{ url_for('menu') }}">Menu</a></p></div>
+                </div>
+            </form>
+        </main>
     </div>
-
-    <div>
-        <p><a href="/Keys"> ¿Quiere cambiar las claves?</a></p>
-    </div>
-
-    <form method=post enctype=multipart/form-data>
-        <div>
-            <label for="image">Seleccione la imagen:</label> <input type=file id="image" name=file><br><br>
-        </div>
-
-        <input type=submit value=Desencriptar>
-    </form>
-    <p><a href="{{ url_for('menu') }}">Menu</a></p>
 
 {% endblock %}

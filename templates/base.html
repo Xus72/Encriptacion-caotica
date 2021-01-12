@@ -4,34 +4,16 @@
     <meta charset="UTF-8">
     <title>{% block title %} {% endblock %}</title>
 
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
-    <style type="text/css">
-
-        dl {
-        border: 3px double #ccc;
-        padding: 2em;
-         }
-        dt {
-            float: left;
-            clear: left;
-            width: 110px;
-            text-align: right;
-            font-weight: bold;
-            color: green;
-        }
-        dd {
-            margin: 0 0 0 120px;
-            padding: 0 0 0.5em 0;
-        }
-
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!--<script src="{{ url_for('static', filename='background.js') }}"></script>-->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}"/>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     {% block scripts %} {% endblock %}
 </head>
-<body>
+<body class="h-100">
+    <canvas id="c"></canvas>
     {% with messages = get_flashed_messages(with_categories=True) %}
       {% if messages %}
         {% for category, message in messages %}

@@ -27,8 +27,8 @@
 {#    {% endwith %}#}
 
         <h1 class="container">Introduzca las claves</h1>
-        <div class="container">
-            <label for="keys">Posee la clave pública y privada </label><select id="keys" name="keys" onchange="showHideKey()">
+        <div class="container d-flex w-100 h-100 p-3 mx-auto flex-column">
+            <label class="form-label" for="keys">Posee la clave pública y privada </label><select class="form-select" id="keys" name="keys" onchange="showHideKey()" aria-label="Default select example">
                 <option value="si">Si</option>
                 <option value="no">No</option>
             </select>
@@ -53,7 +53,7 @@
             <dt>Clave privada:</dt>
             <dd><input type="text" id="private_key" name="private"></dd>
         </dl>
-        <p><input type=submit value=Guardar> <a href="{{ url_for('menu') }}">Menu</a></p>
+        <p><input class="btn btn-lg btn-light fw-bold" type=submit value=Guardar> <a class="btn btn-lg btn-light fw-bold" href="{{ url_for('menu') }}">Menu</a></p>
 {#        <fieldset id="inserta_keys" style="display: block">#}
 {#            <label for="public_key">Introduzca la clave pública: </label><input type="text" id="public_key" name="public">#}
 {#            <br><br>#}

@@ -58,14 +58,14 @@ def decrypt():
 
 
 def decrypt_aux(f, pv, pb, opt="encrypt"):
-    filename = secure_filename(f.filename)
+    #filename = secure_filename(f.filename)
+    filename = f.filename
     f.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
     key = k.Key(pv, pb)
     if opt == "encrypt":
         e.encrypt(os.path.join(app.config['UPLOAD_FOLDER'], filename), app.config['UPLOAD_FOLDER'], key)
     else:
         d.decrypt(os.path.join(app.config['UPLOAD_FOLDER'], filename), app.config['UPLOAD_FOLDER'], key)
-
 
 
 @app.route('/Encriptar', methods=["POST", "GET"])

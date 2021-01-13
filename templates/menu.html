@@ -12,12 +12,16 @@
     <main class="item px-3">
         <h1>Sistemas de encriptación caóticos</h1>
         <p class="lead">Gracias a los Sistemas de encriptación caóticos podrás encriptar y desencriptar imagenes de forma segura</p>
+        <p class="lead">A continuación tendrá que insertar un par de keys (pública, privada) que se emplearán para encriptar/desencriptar la imagen.
+        En esta versión de la aplicacion web, solo puede encriptar/desencriptar imágenes una a una. Las imagenes desencriptadas se almacennan en la
+                        carpeta <strong>imagenes</strong>. El intento de desencriptación malintencionado (claves erroneas) provocará un
+        bloqueo en la imagen imposibilitando su desencriptación.</p>
         <p class="lead">Opciones:</p>
         <div class="botones row row-cols-4">
             <div class="col"><p class="lead"><a class="btn btn-lg btn-light fw-bold" href="{{ url_for('keys') }}">Insertar Keys</a></p></div>
             <div class="col"><p class="lead"><a class="btn btn-lg btn-light fw-bold" href="{{ url_for('encrypt') }}">Encriptar Imagen</a></p></div>
             <div class="col"><p class="lead"><a class="btn btn-lg btn-light fw-bold" href="{{ url_for('decrypt') }}">Desencriptar Imagen</a></p></div>
-            <div class="col"><p class="lead"><a class="btn btn-lg btn-light fw-bold" href="{{ url_for('reset') }}">Resetear</a> </p></div>
+            <div class="col"><p class="lead"><a class="btn btn-lg btn-light fw-bold" href="{{ url_for('reset') }}">Resetear Keys</a> </p></div>
         </div>
     </main>
 </div>

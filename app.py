@@ -6,7 +6,9 @@ import henon_arnold.encrypt as e
 import henon_arnold.decrypt as d
 import henon_arnold.Key as k
 
-UPLOAD_FOLDER = '/home/infiniteloop/Encriptacion-caotica/imagenes'
+dirpath = os.path.realpath("imagenes")
+# Determinar path donde querer guardar las imagenes
+UPLOAD_FOLDER = dirpath
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
 app = Flask(__name__)
@@ -106,7 +108,7 @@ def keys():
         if private_key and public_key:
             session["private_key"] = private_key
             session["public_key"] = public_key
-            return redirect(url_for("encrypt"))
+            return redirect(url_for("menu"))
         else:
             flash(u"Introduzca ambas claves", "alert")
             redirect(request.url)

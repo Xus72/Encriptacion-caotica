@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block content %}
-    <div class="enc-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+    <div class="menu-container d-flex w-100 h-100 p-3 mx-auto flex-column">
         <main class="px-3">
             <h1>Encriptar imagen</h1>
             <p class="lead">Clave pública: {{ public_key }}</p>
@@ -15,7 +15,7 @@
             <div>
                 <p class="lead"><a href="{{ url_for('keys') }}"> ¿Quiere cambiar las claves?</a></p>
             </div>
-            <form class="container" method=post enctype=multipart/form-data>
+            <form method=post enctype=multipart/form-data>
                 <label class="label-form" for="image">Seleccione la imagen:</label> <input class="form-control" type=file id="image" name=file>
                 <div class="botones row row-col-2">
                     <div class="col"><input class="btn btn-form btn-lg btn-light fw-bold btn-margin" type=submit value=Encriptar></div>

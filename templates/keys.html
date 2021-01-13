@@ -26,43 +26,33 @@
 {#        {% endif %}#}
 {#    {% endwith %}#}
 
-        <h1 class="container">Introduzca las claves</h1>
-        <div class="container d-flex w-100 h-100 p-3 mx-auto flex-column">
+<div class="menu-container container d-flex w-100 h-100 p-3 mx-auto flex-column">
+    <main class="px-3">
+        <h1>Introduzca las claves</h1>
             <label class="form-label" for="keys">Posee la clave pública y privada </label><select class="form-select" id="keys" name="keys" onchange="showHideKey()" aria-label="Default select example">
                 <option value="si">Si</option>
                 <option value="no">No</option>
             </select>
-            <br><br>
-        </div>
 
-        <div class="container" id="genera_keys" style="display: none">
-            <fieldset>
-                <p>Generación de claves:</p>
-                <ul>
-                    <li>Clave pública: {{ public_key }}</li>
-                    <li>Clave privada: {{ private_key }}</li>
-                </ul>
-            </fieldset>
-        </div>
+            <div class="container" id="genera_keys" style="display: none">
+                    <p class="lead">Generación de claves:</p>
+                    <p class="lead">Clave pública: {{ public_key }}</p>
+                    <p class="lead">Clave privada: {{ private_key }}</p>
+            </div>
 
 
-    <form method=post class="container" enctype=multipart/form-data style="display: block">
-        <dl>
-            <dt>Clave pública:</dt>
-            <dd><input type="text" id="public_key" name="public"></dd>
-            <dt>Clave privada:</dt>
-            <dd><input type="text" id="private_key" name="private"></dd>
-        </dl>
-        <p><input class="btn btn-lg btn-light fw-bold" type=submit value=Guardar> <a class="btn btn-lg btn-light fw-bold" href="{{ url_for('menu') }}">Menu</a></p>
-{#        <fieldset id="inserta_keys" style="display: block">#}
-{#            <label for="public_key">Introduzca la clave pública: </label><input type="text" id="public_key" name="public">#}
-{#            <br><br>#}
-{#            <label for="private_key">Introduzca la clave privada: </label><input type="text" id="private_key" name="private">#}
-{#        </fieldset>#}
-{#        <br>#}
-{#        <input type=submit value=Guardar>#}
-    </form>
-
+        <form  method=post enctype=multipart/form-data style="display: block">
+            <label class="label-form">Clave pública:</label>
+            <input class="form-control" type="text" id="public_key" name="public">
+            <label class="label-form" class="lead">Clave privada:</label>
+            <input class="form-control" type="text" id="private_key" name="private">
+            <div class="botones row row-col-2">
+                <div class="col"><p><input class="btn btn-form btn-lg btn-light fw-bold btn-margin" type=submit value=Guardar></div> 
+                <div class="col"><a class="btn btn-form btn-lg btn-light fw-bold btn-margin" href="{{ url_for('menu') }}">Menu</a></p></div>
+            </div>
+        </form>
+    </main>
+</div>
 
 
 {% endblock %}

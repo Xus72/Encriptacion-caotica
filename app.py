@@ -6,7 +6,7 @@ import henon_arnold.encrypt as e
 import henon_arnold.decrypt as d
 import henon_arnold.Key as k
 
-UPLOAD_FOLDER = r"D:\Fork\Encriptacion-caotica\imagenes"
+UPLOAD_FOLDER = '/home/infiniteloop/Encriptacion-caotica/imagenes'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
 app = Flask(__name__)
@@ -20,49 +20,7 @@ def allowed_file(filename):
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
-@app.route('/', methods=['GET', 'POST'])
-def upload_file():
-    [private, public] = k.genKeyPairs()
-
-    if request.method == 'POST':
-        # check if the post request has the file part
-        if 'file' not in request.files:
-            flash(u'No file part', "alert")
-            return redirect(request.url)
-        file = request.files['file']
-        option = request.form['opcion']
-        private_key = request.form['private']
-        public_key = request.form['public']
-        # if user does not select file, browser also
-        # submit an empty part without filename
-        if file.filename == '':
-            flash(u'No selected file', "alert")
-            return redirect(request.url)
-
-        if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-
-            if option == "Encriptar":
-                # public_key = 604905670620403574245710191030
-                # private_key = 747588193471049732859143835301
-                key = k.Key(private_key, public_key)
-                e.encrypt(os.path.join(app.config['UPLOAD_FOLDER'], filename), app.config['UPLOAD_FOLDER'], key)
-                return redirect(url_for('uploaded_file',
-                                        filename=filename))
-
-            if option == "Desencriptar":
-                # public_key = 604905670620403574245710191030
-                # private_key = 747588193471049732859143835301
-                key = k.Key(private_key, public_key)
-                d.decrypt(os.path.join(app.config['UPLOAD_FOLDER'], filename), app.config['UPLOAD_FOLDER'], key)
-                return redirect(url_for('uploaded_file',
-                                        filename=filename))
-
-    return render_template("index.html", private_key=private, public_key=public)
-
-
-@app.route('/menu')
+@app.route('/')
 def menu():
     return render_template("menu.html")
 

@@ -41,3 +41,16 @@ dd {
     display: grid;
     grid-template-rows: auto auto auto;
 }
+
+.keys-container{
+    max-width: 42em;
+    display: grid;
+    grid-template-rows: auto auto auto;
+}
+
+
+footer{
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+}

@@ -13,12 +13,12 @@
     {% block scripts %} {% endblock %}
 </head>
 <body class="h-100">
-    <canvas id="c"></canvas>
+    <!--<canvas id="c"></canvas>-->
     {% with messages = get_flashed_messages(with_categories=True) %}
       {% if messages %}
         {% for category, message in messages %}
             {% if category == "alert" %}
-                <div class="alert alert-warning alert-dismissible fade in">
+            <div class="alert alert-warning" role="alert">
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                 <strong>{{ message }}</strong>
             {% else %}
@@ -32,5 +32,12 @@
     {% endwith %}
     {% block content %}
     {% endblock %}
+    <footer class="bg-light text-center text-lg-start">
+        <!-- Copyright -->
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+          <span class="text-dark">Trabajo realizado por Jesús Manuel Sánchez y Ventura Lastrucci Carriazo</span>
+        </div>
+        <!-- Copyright -->
+      </footer>
 </body>
 </html>

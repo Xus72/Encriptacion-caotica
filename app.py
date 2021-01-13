@@ -88,7 +88,7 @@ def encrypt():
                 try:
                     decrypt_aux(file, private, public)
                 except:
-                    flash("Problema con la encriptación", "alert")
+                    flash("Problema con la encriptacion", "alert")
                     return redirect(request.url)
 
                 flash("Imagen encriptada", "info")

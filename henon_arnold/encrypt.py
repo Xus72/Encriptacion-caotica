@@ -32,7 +32,11 @@ def encrypt(filepath, destination_path, key):
 
     #begin diffusion
     # start_time = time.perf_counter()
-    im_diffused = i.Image(destination_path+"\\"+im_original.filename.split('.')[0]+".png", i.Type.ENCRYPTED, dif.pixelManipulation(im_confused), key)
+    if os.name == "posix":
+        im_diffused = i.Image(destination_path+"/"+im_original.filename.split('.')[0]+".png", i.Type.ENCRYPTED, dif.pixelManipulation(im_confused), key)
+    else:
+        im_diffused = i.Image(destination_path+"\\"+im_original.filename.split('.')[0]+".png", i.Type.ENCRYPTED, dif.pixelManipulation(im_confused), key)
+
     # elapsed_time = time.perf_counter() - start_time
     # print(f"Elapsed time: {elapsed_time:0.4f} seconds")
     cv2.imwrite(im_diffused.filepath, im_diffused.matrix)

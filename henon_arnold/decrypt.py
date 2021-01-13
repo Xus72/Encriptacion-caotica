@@ -28,7 +28,11 @@ def decrypt(filepath, destination_path, key):
 
     #reshape crop border
     start_time = time.perf_counter()
-    im_decrypted = i.Image(destination_path+"\\"+im_encrypted.filename.split('.')[0]+".png", i.Type.DECRYPTED, res.cropBorder(im_unconfused), key)
+    if os.name == "posix":
+        im_decrypted = i.Image(destination_path+"/"+im_encrypted.filename.split('.')[0]+".png", i.Type.DECRYPTED, res.cropBorder(im_unconfused), key)
+    else:
+        im_decrypted = i.Image(destination_path+"\\"+im_encrypted.filename.split('.')[0]+".png", i.Type.DECRYPTED, res.cropBorder(im_unconfused), key)
+
     elapsed_time = time.perf_counter() - start_time
     print(f"Elapsed time: {elapsed_time:0.4f} seconds")
     cv2.imwrite(im_decrypted.filepath, im_decrypted.matrix)

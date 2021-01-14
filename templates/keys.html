@@ -18,13 +18,6 @@
 {% endblock %}
 
 {% block content %}
-{#    {% with message = get_flashed_messages() %}#}
-{#        {% if message %}#}
-{#            {% for msg in message %}#}
-{#                <p>{{ msg }}</p>#}
-{#            {% endfor %}#}
-{#        {% endif %}#}
-{#    {% endwith %}#}
 
 <div class="menu-container container d-flex w-100 h-100 p-3 mx-auto flex-column">
     <main class="px-3">
@@ -42,9 +35,9 @@
 
 
         <form  method=post enctype=multipart/form-data style="display: block">
-            <label class="label-form">Clave pública:</label>
+            <label for="public_key" class="label-form">Clave pública:</label>
             <input class="form-control" type="text" id="public_key" name="public">
-            <label class="label-form" class="lead">Clave privada:</label>
+            <label for="private_key" class="label-form">Clave privada:</label>
             <input class="form-control" type="text" id="private_key" name="private">
             <div class="botones row row-col-2">
                 <div class="col"><p><input class="btn btn-form btn-lg btn-light fw-bold btn-margin" type=submit value=Guardar></div> 

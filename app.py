@@ -6,8 +6,8 @@ import henon_arnold.encrypt as e
 import henon_arnold.decrypt as d
 import henon_arnold.Key as k
 
-dirpath = os.path.realpath("imagenes")
 # Determinar path donde querer guardar las imagenes
+dirpath = os.path.realpath("imagenes")
 UPLOAD_FOLDER = dirpath
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
@@ -58,7 +58,6 @@ def decrypt():
 
 
 def decrypt_aux(f, pv, pb, opt="encrypt"):
-    #filename = secure_filename(f.filename)
     filename = f.filename
     f.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
     key = k.Key(pv, pb)
@@ -127,15 +126,6 @@ def reset():
     session.pop("primary_key", None)
     session.pop("public_key", None)
     return redirect(url_for("menu"))
-
-
-@app.route('/download')
-def download_file():
-    # path = "html2pdf.pdf"
-    # path = "info.xlsx"
-    path = "imagenes/dibujo.png"
-    # path = "sample.txt"
-    return send_file(path, as_attachment=True)
 
 
 from werkzeug.middleware.shared_data import SharedDataMiddleware

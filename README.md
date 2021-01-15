@@ -6,11 +6,19 @@ Aplicación web de encriptación de imágenes RGB usando una combinación de los
   <img src="imagenes/menu_principal.png">
 </p>
 
+## Instalar librerias
+```
+pip install -r requirements.txt
+```
+
 ## Como ejecutar la aplicación
 
 Para ejecutar la aplicación debe acceder a la ruta del repositorio mediante un terminal.
 
-Ejecutar el comando <strong>python app.py</strong>
+Ejecutar el comando 
+````
+python app.py
+````
 
 ## Como encriptar una imagen
 

@@ -9,7 +9,7 @@ import henon_arnold.Key as k
 # Determinar path donde querer guardar las imagenes
 dirpath = os.path.realpath("imagenes")
 UPLOAD_FOLDER = dirpath
-ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
+ALLOWED_EXTENSIONS = {'png'}
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -50,6 +50,9 @@ def decrypt():
                     flash("Imagen desencriptada", "info")
                     return redirect(url_for('uploaded_file',
                                             filename=file.filename))
+                else: 
+                    flash(u"El formato de la imagen tiene que ser PNG", "alert")
+                    return redirect(request.url)
         return render_template("decrypt.html", private_key=private, public_key=public)
 
     else:
@@ -93,6 +96,9 @@ def encrypt():
                 flash("Imagen encriptada", "info")
                 return redirect(url_for('uploaded_file',
                                         filename=file.filename))
+            else: 
+                flash(u"El formato de la imagen tiene que ser PNG", "alert")
+                return redirect(request.url)
         return render_template("encrypt.html", private_key=private, public_key=public)
     else:
         return redirect(url_for("keys"))
@@ -118,7 +124,7 @@ def keys():
 @app.route('/uploads/<filename>')
 def uploaded_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'],
-                               filename)
+                               filename.split('.')[0]+".png")
 
 
 @app.route('/reset')
